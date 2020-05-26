@@ -1,6 +1,7 @@
 import XCTest
-@testable import iCalTests
 
-XCTMain([
-    testCase(iCalTests.allTests),
-])
+import iCalKitTests
+
+var tests = [XCTestCaseEntry]()
+tests += OutlookServiceProviderTests.allTests()
+XCTMain(tests)

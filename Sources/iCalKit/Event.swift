@@ -1,7 +1,10 @@
+
+
 import Foundation
 
 /// TODO add documentation
 public struct Event {
+
     public var subComponents: [CalendarComponent] = []
     public var otherAttrs = [String:String]()
 
@@ -22,9 +25,11 @@ public struct Event {
         self.uid = uid
         self.dtstamp = dtstamp
     }
+
 }
 
 extension Event: CalendarComponent {
+
     public func toCal() -> String {
         var str: String = "BEGIN:VEVENT\n"
 
@@ -58,9 +63,11 @@ extension Event: CalendarComponent {
         str += "END:VEVENT"
         return str
     }
+
 }
 
 extension Event: IcsElement {
+
     public mutating func addAttribute(attr: String, _ value: String) {
         switch attr {
         case "UID":
@@ -81,6 +88,7 @@ extension Event: IcsElement {
             otherAttrs[attr] = value
         }
     }
+
 }
 
 extension Event: Equatable { }
@@ -90,7 +98,9 @@ public func ==(lhs: Event, rhs: Event) -> Bool {
 }
 
 extension Event: CustomStringConvertible {
+
     public var description: String {
         return "\(dtstamp.toString()): \(summary ?? "")"
     }
+
 }

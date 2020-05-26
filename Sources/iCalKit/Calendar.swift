@@ -1,7 +1,11 @@
+
+
 import Foundation
+
 
 /// TODO add documentation
 public struct Calendar {
+
     public var subComponents: [CalendarComponent] = []
     public var otherAttrs = [String:String]()
 
@@ -10,6 +14,7 @@ public struct Calendar {
             self.subComponents = components
         }
     }
+
 }
 
 extension Calendar: IcsElement {
@@ -31,6 +36,7 @@ extension Calendar: IcsElement {
 }
 
 extension Calendar: CalendarComponent {
+
     public func toCal() -> String {
         var str = "BEGIN:VCALENDAR\n"
 
@@ -45,4 +51,5 @@ extension Calendar: CalendarComponent {
         str += "END:VCALENDAR"
         return str
     }
+
 }

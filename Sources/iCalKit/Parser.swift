@@ -1,7 +1,11 @@
+
+
 import Foundation
+
 
 /// TODO add documentation
 internal class Parser {
+
     let icsContent: [String]
 
     init(_ ics: [String]) {
@@ -70,6 +74,7 @@ internal class Parser {
             }
         }
 
-        return completeCal.flatMap{ $0 }
+        return completeCal.compactMap { $0 }
     }
+
 }
