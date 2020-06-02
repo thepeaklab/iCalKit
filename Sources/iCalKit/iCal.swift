@@ -1,4 +1,7 @@
+
+
 import Foundation
+
 
 public enum iCal {
     /// Loads the content of a given string.
@@ -6,7 +9,9 @@ public enum iCal {
     /// - Parameter string: string to load
     /// - Returns: List of containted `Calendar`s
     public static func load(string: String) -> [Calendar] {
-        let icsContent = string.components(separatedBy: "\n")
+        let icsContent = string
+            .replacingOccurrences(of: "\r", with: "")
+            .components(separatedBy: "\n")
         return parse(icsContent)
     }
 
@@ -39,4 +44,5 @@ public enum iCal {
         dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
         return dateFormatter
     }()
+
 }

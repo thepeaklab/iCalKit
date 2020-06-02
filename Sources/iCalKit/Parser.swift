@@ -38,6 +38,16 @@ internal class Parser {
                 inEvent = true
                 currentEvent = Event()
                 continue
+            case let line where line.hasPrefix("DTSTART"):
+                inEvent = true
+                let dateString = String(line.split(separator: ":").last ?? "")
+                currentEvent?.dtstart = dateString.toDate()
+                continue
+            case let line where line.hasPrefix("DTEND"):
+                inEvent = true
+                let dateString = String(line.split(separator: ":").last ?? "")
+                currentEvent?.dtend = dateString.toDate()
+                continue
             case "END:VEVENT":
                 inEvent = false
                 currentCalendar?.append(component: currentEvent)

@@ -10,6 +10,7 @@ import XCTest
 @testable import iCalKit
 
 class iCalTests: XCTestCase {
+    
     static var allTests = [
         ("testLoadLocalFile", testLoadLocalFile),
         ("testEventData", testEventData),
@@ -20,14 +21,13 @@ class iCalTests: XCTestCase {
     var exampleCals: [iCalKit.Calendar] = []
 
     override func setUp() {
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "example", withExtension: "ics") else {
-            XCTAssert(false, "no test ics file")
-            return
-        }
+        // Workaround to access resource file
+        let thisSourceFile = URL(fileURLWithPath: #file)
+        let thisDirectory = thisSourceFile.deletingLastPathComponent()
+        let resourceURL = thisDirectory.appendingPathComponent("example.ics")
         
         do {
-            self.exampleCals = try iCal.load(url: url)
+            self.exampleCals = try iCal.load(url: resourceURL)
         } catch {
             print(error.localizedDescription)
         }
@@ -90,4 +90,5 @@ class iCalTests: XCTestCase {
         XCTAssertEqual("\(cals[0].subComponents[0])", "19970714T170000Z: Bastille Day Party")
         XCTAssertEqual("\(cals[0].subComponents[1])", "19980714T170000Z: Something completely different")
     }
+
 }
